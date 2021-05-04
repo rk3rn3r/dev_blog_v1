@@ -1,0 +1,21 @@
+= rk3rn3r.dev Website v1
+
+Website using https://orchid.run/[Orchid] static site generator.
+
+== Dev mode (HTTP server watching for file changes)
+
+[source,console]
+----
+./gradlew orchidServe
+----
+
+== Building locally
+
+[source,console]
+----
+./gradlew orchidBuild
+----
+
+== Deployment
+
+Deployment automated via Netlify to https://www.rk3rn3r.dev[rk3rn3r.dev].

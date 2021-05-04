@@ -1,0 +1,24 @@
++++
+title = 'Welcome on my blog!'
+author = 'René Kerner'
+draft = false
+tags = [
+'welcome',
+'blog'
+'Apache Kafka',
+'data streaming',
+'architecture',
+'microservices',
+'Java',
+'Kotlin',
+'PHP'
+]
++++
+
+Welcome on my new private developer blog!
+
+I am going to blog about my work at Red Hat on the https://debezium.io/[Debezium] project,
+about software architecture, mainly streaming architectures with
+https://kafka.apache.org/[Apache Kafka] and microservices.
+
+I plan to provide articles and snippets about Java, Kotlin and PHP.

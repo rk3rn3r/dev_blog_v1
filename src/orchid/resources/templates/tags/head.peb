@@ -1,0 +1,50 @@
+{# @pebvariable name="page" type="com.eden.orchid.api.theme.pages.OrchidPage" -#}
+{# @pebvariable name="site" type="com.eden.orchid.api.site.OrchidSite" -#}
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="generator" content="Orchid {{ site.orchidVersion }}"/>
+    <link rel="icon" href="{{ site.about.favicon }}">
+
+{%- if page.noIndex and page.noFollow -%}
+    <meta name="robots" content="noindex, nofollow">
+{%- elseif page.noIndex and not page.noFollow -%}
+    <meta name="robots" content="noindex">
+{%- elseif not page.noIndex and page.noFollow -%}
+    <meta name="robots" content="nofollow">
+{%- else -%}
+    <meta name="robots" content="index, follow">
+{%- endif -%}
+
+{%- if page.title is not empty %}
+    {%- if page.subtitle is not empty %}
+    <title>{{ page.title }}: {{ page.subtitle }} @ {{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+    {%- else %}
+    <title>{{ page.title }} @ {{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+    {%- endif %}
+{%- else %}
+    <title>{{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+{%- endif -%}
+
+{%- if page.description is not empty %}
+    <meta name="description" content="{{ page.description }}">
+{%- else %}
+    <meta name="description" content="{{ site.getSiteInfo().siteDescription}}">
+{%- endif -%}
+
+{%- if page.previous is not empty %}
+    <link rel="prev" href="{{ page.previous.link }}">
+{%- endif -%}
+{%- if page.next is not empty %}
+    <link rel="next" href="{{ page.next.link }}">
+{%- endif %}
+
+    <script>
+        window.site = {{ site.toJSON() | raw }};
+    </script>
+
+{%- if site.debug -%}
+    {%- include 'includes/debug' -%}
+{%- endif -%}
+
+{%- include '?meta' -%}
