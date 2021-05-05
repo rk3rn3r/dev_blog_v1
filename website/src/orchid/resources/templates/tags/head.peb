@@ -1,0 +1,68 @@
+{#- @pebvariable name="page" type="com.eden.orchid.api.theme.pages.OrchidPage" -#}
+{#- @pebvariable name="theme" type="com.eden.orchid.api.theme.AbstractTheme" -#}
+{#- @pebvariable name="site" type="com.eden.orchid.api.site.OrchidSite" -#}
+    {% include '?trackingHeadStart' %}
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid {{ site.orchidVersion }}"/>
+<link rel="icon" href="{{ site.about.favicon }}">
+
+{%- if page.noIndex and page.noFollow -%}
+    <meta name="robots" content="noindex, nofollow">
+{%- elseif page.noIndex and not page.noFollow -%}
+    <meta name="robots" content="noindex">
+{%- elseif not page.noIndex and page.noFollow -%}
+    <meta name="robots" content="nofollow">
+{%- else -%}
+    <meta name="robots" content="index, follow">
+{%- endif -%}
+
+{%- if page.title is not empty %}
+    {%- if page.subtitle is not empty %}
+    <title>{{ page.title }}: {{ page.subtitle }} @ {{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+    {%- else %}
+    <title>{{ page.title }} @ {{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+    {%- endif %}
+{%- else %}
+    <title>{{ site.getSiteInfo().siteName | raw | replace({'<span class="titlesup">': '', '</span>': ''}) }}</title>
+{%- endif -%}
+
+{%- if page.description is not empty %}
+    <meta name="description" content="{{ page.description }}">
+{%- else %}
+    <meta name="description" content="{{ site.getSiteInfo().siteDescription}}">
+{%- endif -%}
+
+{%- if page.previous is not empty %}
+    <link rel="prev" href="{{ page.previous.link }}">
+{%- endif -%}
+{%- if page.next is not empty %}
+    <link rel="next" href="{{ page.next.link }}">
+{%- endif %}
+
+<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css" />
+<!-- start:inject styles -->
+{%- set styles = page.styles %}
+    {%- if styles|length > 0 %}
+        {%- for style in styles %}
+        {{ style.renderAssetToPage()|raw }}
+        {%- endfor %}
+    {%- endif %}
+<!-- end:inject styles -->
+
+{%- if site.debug -%}
+    {%- include 'includes/debug' %}
+{%- endif -%}
+
+    <script>
+        window.site = {{ site.toJSON() | raw }};
+    </script>
+
+{% include 'includes/metaComponentHolder' with {"componentHolder": theme.metaComponents, "metaLocation":"head"} %}
+    {% include 'includes/metaComponentHolder' with {"componentHolder": page.metaComponents, "metaLocation":"head"} %}
+
+
+{%- include '?meta' -%}
+
+{% include '?trackingHeadEnd' %}

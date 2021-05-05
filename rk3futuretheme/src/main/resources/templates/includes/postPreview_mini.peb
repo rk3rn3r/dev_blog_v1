@@ -1,0 +1,30 @@
+<section>
+    <div class="mini-posts">
+    {% for post in component.recentPosts %}
+
+        <article class="mini-post">
+            <header>
+                <h3><a href="{{ post.link }}">{{ post.title }}</a></h3>
+                <time class="published" datetime="{{ post.publishDate|localDate('yyyy-MM-dd') }}">
+                {{ post.publishDate|localDate('MMMM dd, yyyy') }}
+                </time>
+                {% if post.author.link is not empty %}
+                    <a href="{{ post.author.link }}" class="author">
+                        <img src="{{ post.author.avatar }}" alt="{{ post.author.name }}"/>
+                    </a>
+                {% else %}
+                    <span class="author">
+                        <img src="{{ post.author.avatar }}" alt="{{ post.author.name }}"/>
+                    </span>
+                {% endif %}
+            </header>
+
+            {% if post.featuredImage.exists %}
+                {% set featuredImage = post.featuredImage|resize(350, 150, 'c') %}
+                <a href="{{ post.link }}" class="image"><img src="{{ featuredImage }}" alt="{{ featuredImage.alt }}" title="{{ featuredImage.title }}"/></a>
+            {% endif %}
+        </article>
+
+    {% endfor %}
+    </div>
+</section>

@@ -1,0 +1,17 @@
+
+{% if (page.previous is not empty) or (page.next is not empty) %}
+<!-- Pagination -->
+<ul class="actions pagination">
+    {% if page.previous is not empty %}
+        <li><a href="{{ page.previous.link }}" class="button big previous">Previous Page</a></li>
+    {% else %}
+        <li><span class="disabled button big previous">Previous Page</span></li>
+    {% endif %}
+
+    {% if page.next is not empty %}
+        <li><a href="{{ page.next.link }}" class="button big next">Next Page</a></li>
+    {% else %}
+        <li><span class="disabled button big next">Next Page</span></li>
+    {% endif %}
+</ul>
+{% endif %}

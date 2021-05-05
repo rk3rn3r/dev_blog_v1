@@ -8,3 +8,5 @@
  */
 
 rootProject.name = "rk3rn3r-dev-blog"
+include("rk3futuretheme")
+include("website")

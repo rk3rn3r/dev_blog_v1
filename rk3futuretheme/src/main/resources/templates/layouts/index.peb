@@ -1,0 +1,46 @@
+{% extends 'layouts/layoutBase' %}
+
+{% block bodyClass %}
+    {{ 'index' }}
+{% endblock %}
+
+{% block body %}
+
+    <!-- Main -->
+    <div id="main">
+        {% page %}
+
+        {% include 'includes/pagination' %}
+    </div>
+
+    <!-- Sidebar -->
+    <section id="sidebar">
+
+        <!-- Intro -->
+        <section id="intro">
+            <a href="{{ homepageUrl() }}" class="logo"><img src="{{ site.about.avatar }}" alt="{{ site.about.siteName }}"/></a>
+            <header>
+                <h2>{{ site.about.siteName }}</h2>
+                <p>{{ site.about.subtitle }}</p>
+            </header>
+        </section>
+
+        {% embed 'includes/componentHolder' with {"componentHolder": theme.sidebar} %}
+            {% block componentWrapper %}
+            <article class="post single">
+              {{ parent() }}
+            </article>
+            {% endblock %}
+        {% endembed %}
+
+        <!-- About -->
+        <section class="blurb">
+            <h2>About</h2>
+            <p>{{ site.about.siteDescription }}</p>
+        </section>
+
+        {% include 'includes/footer' %}
+
+    </section>
+
+{% endblock %}

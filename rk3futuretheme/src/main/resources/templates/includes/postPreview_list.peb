@@ -1,0 +1,20 @@
+<section>
+    <ul class="posts">
+    {% for post in component.recentPosts %}
+        <li>
+            <article>
+                <header>
+                    <h3><a href="{{ post.link }}">{{ post.title }}</a></h3>
+                    <time class="published" datetime="{{ post.publishDate|localDate('yyyy-MM-dd') }}">
+                    {{ post.publishDate|localDate('MMMM dd, yyyy') }}
+                    </time>
+                </header>
+                {% if post.featuredImage.exists %}
+                {% set featuredImage = post.featuredImage|resize(64, 30, 'c') %}
+                    <a href="{{ post.link }}" class="image"><img src="{{ featuredImage }}" alt="{{ featuredImage.alt }}" title="{{ featuredImage.title }}"/></a>
+                {% endif %}
+            </article>
+        </li>
+    {% endfor %}
+    </ul>
+</section>

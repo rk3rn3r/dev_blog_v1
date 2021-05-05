@@ -1,0 +1,53 @@
+<div class="term-archive">
+<section>
+    <div class="mini-posts archive">
+    {% for page in pages %}
+        <article class="post">
+            <header>
+                <div class="title">
+                    <h2><a href="{{ page.link }}">{{ page.title }}</a></h2>
+                </div>
+                {% if page.key == 'post' %}
+                <div class="meta">
+                    <time class="published" datetime="{{ page.publishDate|localDate('yyyy-MM-dd') }}">
+                    {{ page.publishDate|localDate('MMMM dd, yyyy') }}
+                    </time>
+                    {% if page.author is not empty %}
+                        {% if page.author.link is not empty %}
+                            <a href="{{ page.author.link }}" class="author">
+                                <span class="name">{{ page.author.name }}</span>
+                                <img src="{{ page.author.avatar }}" alt="{{ page.author.name }}"/>
+                            </a>
+                        {% else %}
+                            <span class="author">
+                            <span class="name">{{ page.author.name }}</span>
+                            <img src="{{ page.author.avatar }}" alt="{{ page.author.name }}"/>
+                        </span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endif %}
+            </header>
+            {% if post.featuredImage.exists %}
+                {% set featuredImage = post.featuredImage.get() %}
+                <a href="{{ page.link }}" class="image featured"><img src="{{ featuredImage.link }}" alt="{{ page.title }}"/></a>
+            {% endif %}
+            <p>{{ page | excerpt | raw }}</p>
+            <footer>
+                <ul class="actions">
+                    <li><a href="{{ page.link }}" class="button big">Continue Reading</a></li>
+                </ul>
+                <ul class="stats">
+                {% if page.categories is not empty %}
+                {% for category in page.categories %}
+                    <li>{{ anchor(title=(category|title), itemId=category, collectionType="taxonomies", collectionId="category") | raw }}</li>
+                {% if not loop.last -%} > {% endif %}
+                {% endfor %}
+                {% endif %}
+                </ul>
+            </footer>
+        </article>
+    {% endfor %}
+    </div>
+</section>
+</div>

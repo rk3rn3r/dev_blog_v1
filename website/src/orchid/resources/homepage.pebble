@@ -1,0 +1,14 @@
+---
+title: "Software Architecture and Engineering Blog"
+layout: index
+components:
+  - type: pageContent
+  - type: recentPosts
+    limit: 4
+    category: ':any'
+    noWrapper: true
+    template:
+    - 'includes/postPreview_large'
+---
+<h3>Datastores, Apache Kafka, Debezium, Data Streaming, Stream Processing, Java, Kotlin, Photography, Diving, and more</h3>
+

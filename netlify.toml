@@ -7,5 +7,5 @@
 
 [build]
   base    = ""
-  publish = "build/rk3rn3r"
-  command = "./gradlew clean orchidBuild -Penv=prod"
+  publish = "website/build/rk3rn3r"
+  command = "./gradlew clean :website:orchidBuild -PorchidEnvironment=prod"

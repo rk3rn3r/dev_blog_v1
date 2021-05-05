@@ -1,0 +1,33 @@
+$singleWidth: 960px;
+.post.single {
+  max-width: $singleWidth;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pagination-single {
+  display: flex;
+  justify-content: center;
+  .actions.pagination {
+    max-width: $singleWidth*0.8;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 480px) {
+  .pagination-single {
+    .actions.pagination {
+      flex-direction: column;
+      li {
+        padding: 1.5em;
+        a {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+p > img, p > svg {
+  max-width: 100%;
+}

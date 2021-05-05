@@ -1,0 +1,16 @@
+<article class="post single">
+    <header>
+        <div class="title">
+            <h2>{{ page.title }} - {{ page.author.name }}</h2>
+            {% if page.subtitle -%}
+                <h3>{{ page.subtitle }}</h2>
+            {%- endif %}
+        </div>
+    </header>
+    <p>
+        <img style="max-width: 35%; float: left; margin: 0.5em 1em 1em 0; clear: both;" src="{{ page.avatar | baseUrl }}"/>
+        {{ page.content | raw }}
+        <div style="clear: both;"></div>
+    </p>
+</article>
+
